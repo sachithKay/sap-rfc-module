@@ -27,5 +27,6 @@ public class RFCApp {
         }
 
         SapRFCMetadataReader metadataReader = new SapRFCMetadataReader(destination);
+        metadataReader.createBAPIPayload(rfcFunction);
     }
 }
