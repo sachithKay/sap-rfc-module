@@ -24,6 +24,8 @@ import com.sap.conn.jco.JCoFunction;
 import com.sap.conn.jco.JCoFunctionTemplate;
 import com.sap.conn.jco.JCoListMetaData;
 import com.sap.conn.jco.JCoParameterList;
+import com.sap.conn.jco.JCoRecordField;
+import com.sap.conn.jco.JCoRecordFieldIterator;
 import com.sap.conn.jco.JCoStructure;
 import com.sap.conn.jco.JCoTable;
 import org.apache.axiom.om.OMAbstractFactory;
@@ -31,6 +33,10 @@ import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMFactory;
 import org.apache.log4j.Logger;
 
+/**
+ * This class Serializes a RFC function to provide
+ * its XML representation
+ */
 public class RFCFunctionSerializer {
 
     private static Logger LOG = Logger.getLogger(RFCFunctionSerializer.class);
@@ -61,40 +67,44 @@ public class RFCFunctionSerializer {
 
             String type = imports.getTypeAsString(i);
             String paramName = imports.getName(i);
+            boolean isOptional = imports.isOptional(i);
             OMElement importEntryOM = null;
-                switch (type) {
-                    case "STRUCTURE":
-                        JCoStructure structure = function.getImportParameterList().getStructure(paramName);
-                        importEntryOM = handleStructure(paramName, structure);
-                        break;
+            switch (type) {
+                case "STRUCTURE":
+                    JCoStructure structure = function.getImportParameterList().getStructure(paramName);
+                    importEntryOM = handleStructure(paramName, structure);
+                    break;
 
-                    case "TABLE":
-                        JCoTable table = function.getImportParameterList().getTable(paramName);
-                        //handleTables return the updated tables OM element
-                        handleTables(paramName, table, tablesOMElement);
-                        break;
+                case "TABLE":
+                    JCoTable table = function.getImportParameterList().getTable(paramName);
+                    //handleTables return the updated tables OM element
+                    handleTables(paramName, table, tablesOMElement);
+                    break;
 
-                    default:
-                        importEntryOM = handleField(paramName);
-                }
+                default:
+                    importEntryOM = handleField(paramName);
+            }
             importsOM.addChild(importEntryOM);
         }
     }
 
     private void addFunctionTables(OMElement document, JCoFunctionTemplate functionTemplate) {
+
         JCoParameterList tables = functionTemplate.getFunction().getTableParameterList();
         OMElement tablesOMElement = factory.createOMElement(Constants.TABLES_QNAME, null);
-        document.addChild(tablesOMElement);
-        tables.forEach((JCoField tableField) -> {
-            String tableName = tableField.getName();
-            String type = tableField.getTypeAsString();
+        if (tables != null) {
+            document.addChild(tablesOMElement);
+            tables.forEach((JCoField tableField) -> {
+                String tableName = tableField.getName();
+                String type = tableField.getTypeAsString();
 
-            if (type.equalsIgnoreCase("TABLE")) {
-                handleTables(tableName, functionTemplate.getFunction().getTableParameterList().getTable(tableName), tablesOMElement);
-            } else {
-                LOG.error("type not table of item in table list");
-            }
-        });
+                if (type.equalsIgnoreCase("TABLE")) {
+                    handleTables(tableName, functionTemplate.getFunction().getTableParameterList().getTable(tableName), tablesOMElement);
+                } else {
+                    LOG.error("Type not table of item in table list");
+                }
+            });
+        }
     }
 
     private OMElement handleStructure(String structureName, JCoStructure structure) {
@@ -133,12 +143,42 @@ public class RFCFunctionSerializer {
 
     }
 
+    /**
+     * Creates a tables OM object based if the the table structure and adds a single
+     * row as a reference.
+     *
+     * @param tableName JCo table Name
+     * @param table JCoTable Object
+     * @return tables OM element
+     */
     private OMElement handleTable(String tableName, JCoTable table) {
         OMElement tableOMElement = factory.createOMElement(Constants.TABLE_QNAME, null);
         tableOMElement.addAttribute(Constants.NAME_ATTRIBUTE, tableName, null);
-        // fill the table here
+        // fill the table here if possible?
+        OMElement rowOMElement = factory.createOMElement(Constants.ROW_QNAME, null);
+        if (table.getNumColumns() > 0) {
+            // add a row to the table because there are columns.
+            // we will add a sample row into the skeleton with all columns.
+            // user can add more rows be referring the sample row.
+            tableOMElement.addChild(rowOMElement);
+        }
 
+        JCoRecordFieldIterator recordFields = table.getRecordFieldIterator();
 
+        while (recordFields.hasNextField()) {
+            JCoRecordField record = recordFields.nextRecordField();
+            String recordName = record.getName();
+            String recordType = record.getTypeAsString();
+
+            if (recordType.equalsIgnoreCase("STRUCTURE")) {
+                rowOMElement.addChild(handleStructure(recordName, record.getStructure()));
+            } else if (recordType.equalsIgnoreCase("TABLE")) {
+                // do tables have inner tables?
+                rowOMElement.addChild(handleTable(recordName, record.getTable()));
+            } else {
+                rowOMElement.addChild(handleField(recordName));
+            }
+        }
         return tableOMElement;
     }
 

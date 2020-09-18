@@ -24,6 +24,7 @@ public class Constants {
     public static final String IMPORT_QNAME = "import";
     public static final String FIELD_QNAME = "field";
     public static final String STRUCTURE_QNAME = "structure";
+    public static final String ROW_QNAME = "row";
     public static final String TABLES_QNAME = "tables";
     public static final String TABLE_QNAME = "table";
     public static final String NAME_ATTRIBUTE = "name";
