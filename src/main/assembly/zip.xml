@@ -28,11 +28,27 @@
         -->
         <fileSet>
             <directory>${project.basedir}/src/main/resources</directory>
-            <outputDirectory></outputDirectory>
+            <outputDirectory>conf</outputDirectory>
             <includes>
                 <include>log4j.properties</include>
             </includes>
         </fileSet>
+
+        <fileSet> <!-- Add README.txt to HOME -->
+            <directory>${project.basedir}/src/main/resources</directory>
+            <outputDirectory></outputDirectory>
+            <includes>
+                <include>README.txt</include>
+            </includes>
+        </fileSet>
+
+        <fileSet> <!-- Create empty sap directory for destinations-->
+            <outputDirectory>sap</outputDirectory>
+            <excludes>
+                <exclude>**/*</exclude>
+            </excludes>
+        </fileSet>
+
         <!--
             Adds the jar file of our example application to the root directory
             of the created zip package.
@@ -44,5 +60,25 @@
                 <include>*.jar</include>
             </includes>
         </fileSet>
+
+
+        <!-- Should be removed before distribution-->
+        <fileSet>
+            <directory>${project.basedir}/src/main/resources</directory>
+            <outputDirectory>sap</outputDirectory>
+            <includes>
+                <include>ECC.jcoDestination</include>
+            </includes>
+        </fileSet>
+
+        <!-- Should be removed before distribution-->
+        <fileSet>
+            <directory>${project.basedir}/src/main/resources</directory>
+            <outputDirectory>libs</outputDirectory>
+            <includes>
+                <include>sapjco3.jar</include>
+            </includes>
+        </fileSet>
+
     </fileSets>
 </assembly>

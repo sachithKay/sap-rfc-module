@@ -1,0 +1,294 @@
+<payloadFactory description="BAPIPayload"
+              	media-type="xml">
+	<format>
+		<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+			<soap:Body>
+				<bapirfc name="Y_AARIBA_BUSINESS_PARTNER_RPLC"
+       					xmlns="">
+					<import>
+						<structure name="BUSINESSPARTNERSUITEBULKREPLIC">
+							<structure name="BUSINESS_PARTNER_SUITEBULK_REP">
+								<structure name="MESSAGE_HEADER">
+									<structure name="ID">
+										<field name="CONTENT">0108cb7cce6a4604a2f0146f639a4d15</field>
+									</structure>
+									<structure name="UUID">
+										<field name="CONTENT">0108cb7c-ce6a-4604-a2f0-146f639a4d15</field>
+									</structure>
+									<field name="CREATION_DATE_TIME">20200702190535</field>
+									<field name="SENDER_BUSINESS_SYSTEM_ID">comgas-T</field>
+									<field name="RECIPIENT_BUSINESS_SYSTEM_ID">DEVCLNT100</field>
+								</structure>
+								<table name="BUSINESS_PARTNER_SUITEREPLICAT">
+									<row id="0">
+										<structure name="MESSAGE_HEADER">
+											<structure name="ID">
+												<field name="CONTENT">f8bfad7e905241018d7056cd2a02032c</field>
+											</structure>
+											<structure name="UUID">
+												<field name="CONTENT">8bfad7e-9052-4101-8d70-56cd2a02032c</field>
+											</structure>
+											<field name="CREATION_DATE_TIME">20200702190535</field>
+											<field name="SENDER_BUSINESS_SYSTEM_ID">comgas-T</field>
+											<field name="RECIPIENT_BUSINESS_SYSTEM_ID">DEVCLNT100</field>
+										</structure>
+										<structure name="BUSINESS_PARTNER">
+											<structure name="UUID">
+												<field name="CONTENT">639dc6e7-7284-45fb-882d-e2fb71f94f60</field>
+											</structure>
+											<field name="INTERNAL_ID">S22019323</field>
+											<structure name="RECEIVER_UUID">
+												<field name="CONTENT">639dc6e7-7284-45fb-882d-e2fb71f94f60</field>
+											</structure>
+											<field name="ACTION_CODE">04</field>
+											<field name="CHANGE_ORDINAL_NUMBER_VALUE">62</field>
+											<field name="ADDRESS_INFORMATION_LIST_COMPL">X</field>
+											<field name="BANK_DETAILS_LIST_COMPLETE_TRA">X</field>
+											<field name="COMMON_LIST_COMPLETE_TRANSMISS">X</field>
+											<field name="ROLE_LIST_COMPLETE_TRANSMISSIO"/>
+											<field name="IDENTIFICATION_LIST_COMPLETE_T"/>
+											<field name="INDUSTRY_SECTOR_LIST_COMPLETE"/>
+											<field name="TAX_NUMBER_LIST_COMPLETE_TRANS">X</field>
+											<field name="GENERIC_CUSTOM_FIELD_LIST_COMP">X</field>
+											<structure name="SUPPLIER">
+												<field name="ACCOUNTING_INFORMATION_LIST_CO">X</field>
+												<field name="BIDDING_CHARACTERISTIC_LIST_CO">X</field>
+												<field name="PROCUREMENT_CARD_ISSUING_INST1"/>
+												<field name="QUALITIY_MANAGEMENT_LIST_COMPL"/>
+												<field name="PROCUREMENT_ARRANGEMENT_LIST_C">X</field>
+												<field name="SUB_RANGE_LIST_COMPLETE_TRANSM"/>
+												<field name="TAX_GROUPING_LIST_COMPLETE_TRA"/>
+												<field name="SUPPLIER_TEXT_LIST_COMPLETE_TR"/>
+												<field name="GENERIC_CUSTOM_FIELD_LIST_COMP">X</field>
+												<field name="INTERNAL_ID">S22019323</field>
+												<field name="RECEIVER_INTERNAL_ID">0000023172</field>
+												<field name="DELETED_INDICATOR"/>
+												<structure name="ALTERNATIVE_PAYEE_PARTY_INTERN">
+													<field name="CONTENT"/>
+												</structure>
+												<field name="EQUALIZATION_TAX_RELEVANCE_IND"/>
+												<field name="VALUE_ADDED_TAX_RELEVANCE_INDI"/>
+												<field name="SELLER_ASSORTMENT_PRODUCT_GROU"/>
+												<field name="PLANT_LEVEL_RELEVANCE_INDICATO"/>
+												<field name="FOR_SOCIAL_INSURANCE_REGISTERE"/>
+												<field name="TAX_SPLIT_INDICATOR"/>
+												<table name="ACCOUNTING_INFORMATION">
+													<row id="0">
+														<field name="ACTION_CODE">04</field>
+														<field name="WITHHOLDING_TAX_LIST_COMPLETE"/>
+														<field name="ACCOUNTING_TEXT_LIST_COMPLETE"/>
+														<field name="COMPANY_ID">CG01</field>
+														<field name="BLOCKED_INDICATOR"/>
+														<field name="DELETED_INDICATOR"/>
+														<structure name="PAYMENT_METHODS_CODE">
+															<field name="CONTENT">B</field>
+														</structure>
+														<field name="LOCAL_PROCESSING_INDICATOR"/>
+														<field name="DOUBLE_ENTRIES_CHECK_INDICATOR"/>
+														<field name="PAY_ITEMS_SEPARATELY_INDICATOR"/>
+														<field name="PAYMENT_ADVICES_BY_EDIINDICATO"/>
+														<structure name="INVOICE_VERIFICATION_TOLERANCE">
+															<field name="CONTENT"/>
+														</structure>
+														<field name="CUSTOMER_SUPPLIER_CLEARING_IND"/>
+													</row>
+												</table>
+												<structure name="BIDDING_CHARACTERISTIC">
+													<field name="ACTION_CODE">04</field>
+													<field name="MINORITY_OWNED_INDICATOR"/>
+													<field name="WOMEN_OWNED_INDICATOR"/>
+													<field name="SURROGATE_BIDDING_ALLOWED_INDI"/>
+													<field name="OFFLINE_BIDDING_INDICATOR"/>
+												</structure>
+												<table name="PROCUREMENT_ARRANGEMENT">
+													<row id="0">
+														<field name="ACTION_CODE">04</field>
+														<field name="PARTNER_FUNCTIONS_LIST_COMPLET"/>
+														<field name="PURCHASING_TEXT_LIST_COMPLETE"/>
+														<field name="RECEIVER_PURCHASING_ORGANISATI">CG01</field>
+														<field name="PURCHASING_ORGANISATION_ID">CG01</field>
+														<field name="DELETED_INDICATOR"/>
+														<structure name="PURCHASING_TERMS">
+															<field name="RETURN_ITEMS_EVALUATED_RECEIPT"/>
+															<field name="PURCHASING_BLOCKED_INDICATOR"/>
+															<field name="DELIVERY_BASED_INVOICE_VERIFIC"/>
+															<field name="EVALUATED_RECEIPT_SETTLEMENT_I"/>
+															<field name="AUTOMATIC_PURCHASE_ORDER_GENER"/>
+															<field name="PURCHASE_ORDER_BY_SUPPLIER_PRO"/>
+															<field name="DISCOUNT_IN_KIND_ALLOWED_INDIC"/>
+															<field name="INDEX_COMPILATION_FOR_SUBSEQUE"/>
+															<field name="DOCUMENT_INDEX_ALLOWED_INDICAT"/>
+															<field name="AGENCY_BUSINESS_RELEVANCE_INDI"/>
+															<field name="REVALUATION_ALLOWED_INDICATOR"/>
+															<field name="SERVICE_BASED_INVOICE_VERIFICA"/>
+															<field name="SUBSEQUENT_SETTLEMENT_APPLY_IN"/>
+															<field name="BUSINESS_VOLUME_COMPARISON_REQ"/>
+															<field name="PRICING_RELEVANCE_INDICATOR"/>
+															<field name="RACK_JOBBING_INCLUDED_INDICATO"/>
+															<field name="SALES_VOLUME_FULFILLMENT_PERCE">0.0</field>
+														</structure>
+													</row>
+												</table>
+												<table name="GENERIC_CUSTOM_FIELD">
+													<row id="0">
+														<field name="NAME">origemcadastro</field>
+														<field name="CONTENT">Fornecedor Nacional</field>
+													</row>
+													<row id="1">
+														<field name="NAME">Cnae</field>
+														<field name="CONTENT">1830001</field>
+													</row>
+												</table>
+											</structure>
+											<table name="ADDRESS_INFORMATION">
+												<row id="0">
+													<field name="ACTION_CODE">04</field>
+													<field name="ADDRESS_USAGE_LIST_COMPLETE_TR"/>
+													<structure name="UUID">
+														<field name="CONTENT">1e2ae903-c7d8-4c99-9aee-942fe54542e6</field>
+													</structure>
+													<structure name="VALIDITY_PERIOD">
+														<field name="START_DATE">20200701</field>
+														<field name="END_DATE">99991231</field>
+													</structure>
+													<table name="ADDRESS_USAGE">
+														<row id="0">
+															<field name="ACTION_CODE">04</field>
+															<structure name="ADDRESS_USAGE_CODE">
+																<field name="CONTENT">XXDEFAULT</field>
+															</structure>
+															<structure name="VALIDITY_PERIOD">
+																<field name="START_DATE">20200701</field>
+																<field name="END_DATE">99991231</field>
+															</structure>
+															<field name="DEFAULT_INDICATOR">X</field>
+														</row>
+													</table>
+													<structure name="ADDRESS">
+														<field name="ACTION_CODE">04</field>
+														<field name="ADDRESS_NOTE_LIST_COMPLETE_TRA"/>
+														<field name="EMAIL_LIST_COMPLETE_TRANSMISSI"/>
+														<field name="FACSIMILE_LIST_COMPLETE_TRANSM"/>
+														<field name="ORGANISATION_NAME_LIST_COMPLET"/>
+														<field name="PERSON_NAME_LIST_COMPLETE_TRAN"/>
+														<field name="POSTAL_ADDRESS_LIST_COMPLETE_T"/>
+														<field name="TELEPHONE_LIST_COMPLETE_TRANSM"/>
+														<field name="WEB_LIST_COMPLETE_TRANSMISSION"/>
+														<structure name="COMMUNICATION_PREFERENCE">
+															<field name="ACTION_CODE">04</field>
+														</structure>
+														<table name="POSTAL_ADDRESS">
+															<row id="0">
+																<field name="COUNTRY_CODE">BR</field>
+																<structure name="REGION_CODE">
+																	<field name="CONTENT">SP</field>
+																</structure>
+																<field name="CITY_NAME">campinas</field>
+																<field name="DISTRICT_NAME">centro</field>
+																<field name="STREET_POSTAL_CODE">80030-230</field>
+																<field name="STREET_NAME">Rua das flores</field>
+																<field name="HOUSE_ID">159</field>
+																<field name="POBOX_IDVISIBLE_INDICATOR"/>
+															</row>
+														</table>
+													</structure>
+												</row>
+											</table>
+											<table name="BANK_DETAILS">
+												<row id="0">
+													<field name="ACTION_CODE">04</field>
+													<structure name="BANK_DIRECTORY_REFERENCE">
+														<structure name="BANK_INTERNAL_ID">
+															<field name="CONTENT">4080</field>
+														</structure>
+													</structure>
+													<field name="NAME">Banco do Brasil</field>
+													<field name="BANK_ACCOUNT_ID">000100121</field>
+												</row>
+											</table>
+											<table name="COMMON">
+												<row id="0">
+													<field name="ACTION_CODE">04</field>
+													<field name="DELETED_INDICATOR"/>
+													<field name="BLOCKED_INDICATOR"/>
+													<structure name="SALUTATION_TEXT">
+														<field name="CONTENT"/>
+													</structure>
+													<field name="CORRESPONDENCE_BRAILLE_REQUIRE"/>
+													<field name="CORRESPONDENCE_LARGE_PRINT_REQ"/>
+													<field name="NATURAL_PERSON_INDICATOR"/>
+													<structure name="ORGANISATION">
+														<structure name="NAME">
+															<field name="FIRST_LINE_NAME">Ricci Equipamentos</field>
+															<field name="SECOND_LINE_NAME">Ricci Equipamentos</field>
+															<field name="THIRD_LINE_NAME">Ricci Equipamentos</field>
+														</structure>
+													</structure>
+												</row>
+											</table>
+											<table name="TAX_NUMBER">
+												<row id="0">
+													<field name="ACTION_CODE">04</field>
+													<field name="COUNTRY_CODE">US</field>
+													<structure name="TAX_IDENTIFICATION_NUMBER_TYPE">
+														<field name="CONTENT">1</field>
+													</structure>
+													<structure name="PARTY_TAX_ID">
+														<field name="CONTENT">03103546000148</field>
+													</structure>
+												</row>
+												<row id="1">
+													<field name="ACTION_CODE">04</field>
+													<field name="COUNTRY_CODE">BR</field>
+													<structure name="TAX_IDENTIFICATION_NUMBER_TYPE">
+														<field name="CONTENT">3</field>
+													</structure>
+													<structure name="PARTY_TAX_ID">
+														<field name="CONTENT">ISENTO</field>
+													</structure>
+												</row>
+												<row id="2">
+													<field name="ACTION_CODE">04</field>
+													<field name="COUNTRY_CODE">BR</field>
+													<structure name="TAX_IDENTIFICATION_NUMBER_TYPE">
+														<field name="CONTENT">4</field>
+													</structure>
+													<structure name="PARTY_TAX_ID">
+														<field name="CONTENT">ISENTO</field>
+													</structure>
+												</row>
+											</table>
+											<table name="GENERIC_CUSTOM_FIELD">
+												<row id="0">
+													<field name="NAME">UQ_CONTACT_EMAIL</field>
+													<field name="CONTENT">gcarvalho@southend.com.ar</field>
+												</row>
+												<row id="1">
+													<field name="NAME">EmailContato</field>
+													<field name="CONTENT">gcarvalho@southend.com.ar</field>
+												</row>
+												<row id="2">
+													<field name="NAME">NomeContato</field>
+													<field name="CONTENT">Rafael</field>
+												</row>
+												<row id="3">
+													<field name="NAME">SobreNomeContato</field>
+													<field name="CONTENT">Conrado</field>
+												</row>
+												<row id="4">
+													<field name="NAME">TelefoneContato</field>
+													<field name="CONTENT">11987456123</field>
+												</row>
+											</table>
+										</structure>
+									</row>
+								</table>
+							</structure>
+						</structure>
+					</import>
+				</bapirfc>
+			</soap:Body>
+		</soap:Envelope>
+	</format>
+	<args/>
+</payloadFactory>

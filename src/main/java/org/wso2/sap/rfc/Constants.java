@@ -28,6 +28,6 @@ public class Constants {
     public static final String TABLES_QNAME = "tables";
     public static final String TABLE_QNAME = "table";
     public static final String NAME_ATTRIBUTE = "name";
-    public static final String SAMPLE_VALUE = "ADD VALUE HERE";
+    public static final String SAMPLE_VALUE = "?";
 
 }

@@ -1,0 +1,13 @@
+jco.client.client=100
+jco.client.user=INTEGRAECC
+jco.client.passwd=integra2020
+jco.client.lang=pt
+jco.client.ashost=/H/172.31.0.173/S/3302
+jco.client.gwserv=3302
+jco.client.sysnr=02
+jco.client.idle_timeout=5000
+jco.client.logon=0
+jco.client.msserv=3602
+jco.client.trace=0
+jco.client.getsso2=0
+jco.client.r3name=SAPSYS

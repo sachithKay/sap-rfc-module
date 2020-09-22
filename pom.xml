@@ -6,7 +6,7 @@
 
     <groupId>org.wso2.sap</groupId>
     <artifactId>sap-rfc-module</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <repositories>
         <repository>
@@ -88,24 +88,6 @@
                     <target>8</target>
                 </configuration>
             </plugin>
-            <!--<plugin>-->
-                <!--<artifactId>maven-compiler-plugin</artifactId>-->
-                <!--<configuration>-->
-                    <!--<excludes>-->
-                        <!--<exclude>**/*.*</exclude>-->
-                    <!--</excludes>-->
-                <!--</configuration>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>comp</id>-->
-                        <!--<phase>compile</phase>-->
-                    <!--</execution>-->
-                    <!--<execution>-->
-                        <!--<id>test-comp</id>-->
-                        <!--<phase>test-compile</phase>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
         </plugins>
     </build>
 

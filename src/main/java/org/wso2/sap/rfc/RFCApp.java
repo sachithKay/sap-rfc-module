@@ -20,6 +20,8 @@ package org.wso2.sap.rfc;
 
 import org.apache.log4j.Logger;
 
+import java.io.Console;
+
 public class RFCApp {
 
     private static Logger LOG = Logger.getLogger(RFCApp.class);
@@ -27,24 +29,31 @@ public class RFCApp {
     public static void main(String[] args) {
 
         LOG.info("Starting RFC payload builder... ");
-        String operation = null;
-        String destination  = null;
-        String rfcFunction = null;
+        String rfcFunction;
 
-        if (args.length == 3) {
-            operation = args[0];
-            destination = args[1];
-            rfcFunction = args[2];
-        } else {
-            LOG.error("Invalid arguments provided.");
-            System.exit(1);
-        }
-
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Operation: " + operation + "\n Destination: " + destination + "\n RFCFunction: " + rfcFunction);
-        }
-
+        String destination = getValueFromConsole("Please provide the SAP destination :");
         SapRFCMetadataReader metadataReader = new SapRFCMetadataReader(destination);
-        metadataReader.createBAPIPayload(rfcFunction);
+
+        // will repeatedly take RFC names and output payloads
+        while (true) {
+            rfcFunction = getValueFromConsole("Enter RFC Function name :");
+            if (rfcFunction != null) {
+                metadataReader.createBAPIPayload(rfcFunction);
+            } else {
+                break;
+            }
+        }
+    }
+
+    public static String getValueFromConsole(String message) {
+
+        Console console = System.console();
+        if (console != null) {
+            String value;
+            if ((value = console.readLine("[%s]", message)) != null) {
+                return value;
+            }
+        }
+        return null;
     }
 }

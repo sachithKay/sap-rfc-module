@@ -24,8 +24,6 @@ import com.sap.conn.jco.JCoFunction;
 import com.sap.conn.jco.JCoFunctionTemplate;
 import com.sap.conn.jco.JCoListMetaData;
 import com.sap.conn.jco.JCoParameterList;
-import com.sap.conn.jco.JCoRecordField;
-import com.sap.conn.jco.JCoRecordFieldIterator;
 import com.sap.conn.jco.JCoStructure;
 import com.sap.conn.jco.JCoTable;
 import org.apache.axiom.om.OMAbstractFactory;
@@ -48,7 +46,7 @@ public class RFCFunctionSerializer {
         document.addAttribute("name", functionName, null);
         addFunctionImports(document, functionTemplate);
         addFunctionTables(document, functionTemplate);
-        LOG.info(document.toString());
+//        System.out.println("\n Serialized RFC Function: \n" + document.toString());
         return document;
     }
 
@@ -156,6 +154,7 @@ public class RFCFunctionSerializer {
         tableOMElement.addAttribute(Constants.NAME_ATTRIBUTE, tableName, null);
         // fill the table here if possible?
         OMElement rowOMElement = factory.createOMElement(Constants.ROW_QNAME, null);
+        rowOMElement.addAttribute("id", "", null);
         if (table.getNumColumns() > 0) {
             // add a row to the table because there are columns.
             // we will add a sample row into the skeleton with all columns.
@@ -163,22 +162,24 @@ public class RFCFunctionSerializer {
             tableOMElement.addChild(rowOMElement);
         }
 
-        JCoRecordFieldIterator recordFields = table.getRecordFieldIterator();
+            JCoFieldIterator recordFields = table.getFieldIterator();
+            while (recordFields.hasNextField()) {
+                JCoField record = recordFields.nextField();
+                String recordName = record.getName();
+                String recordType = record.getTypeAsString();
 
-        while (recordFields.hasNextField()) {
-            JCoRecordField record = recordFields.nextRecordField();
-            String recordName = record.getName();
-            String recordType = record.getTypeAsString();
-
-            if (recordType.equalsIgnoreCase("STRUCTURE")) {
-                rowOMElement.addChild(handleStructure(recordName, record.getStructure()));
-            } else if (recordType.equalsIgnoreCase("TABLE")) {
-                // do tables have inner tables?
-                rowOMElement.addChild(handleTable(recordName, record.getTable()));
-            } else {
-                rowOMElement.addChild(handleField(recordName));
+                if (recordType.equalsIgnoreCase("STRUCTURE")) {
+                    LOG.info("Table Name: " + tableName);
+                    LOG.info("Inner structure Name: " + recordName);
+                    rowOMElement.addChild(handleStructure(recordName, table.getStructure(recordName)));
+                } else if (recordType.equalsIgnoreCase("TABLE")) {
+                    LOG.info("Table Name: " + tableName);
+                    LOG.info("Inner table Name: " + recordName);
+                    rowOMElement.addChild(handleTable(recordName, table.getTable(recordName)));
+                } else {
+                    rowOMElement.addChild(handleField(recordName));
+                }
             }
-        }
         return tableOMElement;
     }
 

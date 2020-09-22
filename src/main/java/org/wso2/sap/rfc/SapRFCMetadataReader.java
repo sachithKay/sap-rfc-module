@@ -27,6 +27,7 @@ import org.apache.axiom.om.OMElement;
 import org.apache.log4j.Logger;
 import org.wso2.sap.rfc.utils.IOUtils;
 
+import java.nio.file.Paths;
 import java.util.Optional;
 
 public class SapRFCMetadataReader {
@@ -39,13 +40,15 @@ public class SapRFCMetadataReader {
 
         try {
 
-            String confLocation = System.getProperty("user.dir");
+            String confLocation = Paths.get(System.getProperty("user.dir"), "sap").toString();
             LOG.info("Initializing jco.destinations.dir to " + confLocation);
             System.setProperty("jco.destinations.dir", confLocation);
             rfcClient = JCoDestinationManager.getDestination(destination);
             repository = rfcClient.getRepository();
+            LOG.info("Repository initialized for destination " + destination);
         } catch (JCoException e) {
             LOG.error("Error while getting destination or repository", e);
+            System.exit(1);
         }
     }
 
