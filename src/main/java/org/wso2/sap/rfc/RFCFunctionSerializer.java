@@ -46,7 +46,7 @@ public class RFCFunctionSerializer {
         document.addAttribute("name", functionName, null);
         addFunctionImports(document, functionTemplate);
         addFunctionTables(document, functionTemplate);
-//        System.out.println("\n Serialized RFC Function: \n" + document.toString());
+        System.out.println("\n Serialized RFC Function: \n" + document.toString());
         return document;
     }
 
@@ -169,13 +169,17 @@ public class RFCFunctionSerializer {
                 String recordType = record.getTypeAsString();
 
                 if (recordType.equalsIgnoreCase("STRUCTURE")) {
-                    LOG.info("Table Name: " + tableName);
-                    LOG.info("Inner structure Name: " + recordName);
-                    rowOMElement.addChild(handleStructure(recordName, table.getStructure(recordName)));
+                    if (table.getNumRows() > 0) {
+                        rowOMElement.addChild(handleStructure(recordName, table.getStructure(recordName)));
+                    } else {
+                        LOG.warn("Table " + tableName + "does not have any rows. Skipping further processing of structure " + recordName);
+                    }
                 } else if (recordType.equalsIgnoreCase("TABLE")) {
-                    LOG.info("Table Name: " + tableName);
-                    LOG.info("Inner table Name: " + recordName);
-                    rowOMElement.addChild(handleTable(recordName, table.getTable(recordName)));
+                    if (table.getNumRows() > 0) {
+                        rowOMElement.addChild(handleTable(recordName, table.getTable(recordName)));
+                    } else {
+                        LOG.warn("Table " + tableName + "does not have any rows. Skipping further processing of table " + recordName);
+                    }
                 } else {
                     rowOMElement.addChild(handleField(recordName));
                 }
