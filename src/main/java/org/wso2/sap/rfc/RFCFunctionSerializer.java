@@ -170,15 +170,29 @@ public class RFCFunctionSerializer {
 
                 if (recordType.equalsIgnoreCase("STRUCTURE")) {
                     if (table.getNumRows() > 0) {
-                        rowOMElement.addChild(handleStructure(recordName, table.getStructure(recordName)));
+                        rowOMElement.addChild(handleStructure(recordName, record.getStructure()));
                     } else {
-                        LOG.warn("Table " + tableName + "does not have any rows. Skipping further processing of structure " + recordName);
+                        // since we cannot access the structure of the inner structure
+                        // let's add the structure OM element only
+                        OMElement innerStructureOMElement = factory.createOMElement(Constants.STRUCTURE_QNAME, null);
+                        innerStructureOMElement.addAttribute(Constants.NAME_ATTRIBUTE, recordName, null);
+                        rowOMElement.addChild(innerStructureOMElement);
+
+                        LOG.warn("Structure " + recordName + " inside table " + tableName + " cannot be processed.");
                     }
                 } else if (recordType.equalsIgnoreCase("TABLE")) {
                     if (table.getNumRows() > 0) {
-                        rowOMElement.addChild(handleTable(recordName, table.getTable(recordName)));
+                        rowOMElement.addChild(handleTable(recordName, record.getTable()));
                     } else {
-                        LOG.warn("Table " + tableName + "does not have any rows. Skipping further processing of table " + recordName);
+                        // since we cannot process the structure of the inner table
+                        // let's add the table OM only
+                        OMElement innerTableOMElement = factory.createOMElement(Constants.TABLE_QNAME, null);
+                        innerTableOMElement.addAttribute(Constants.NAME_ATTRIBUTE, recordName, null);
+                        OMElement innerRowOMElement = factory.createOMElement(Constants.ROW_QNAME, null);
+                        innerRowOMElement.addAttribute("id", "", null);
+                        rowOMElement.addChild(innerTableOMElement);
+
+                        LOG.warn("Table " + recordName + " inside table " + tableName + " cannot be processed.");
                     }
                 } else {
                     rowOMElement.addChild(handleField(recordName));
