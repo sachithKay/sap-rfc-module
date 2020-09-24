@@ -154,7 +154,7 @@ public class RFCFunctionSerializer {
         tableOMElement.addAttribute(Constants.NAME_ATTRIBUTE, tableName, null);
         // fill the table here if possible?
         OMElement rowOMElement = factory.createOMElement(Constants.ROW_QNAME, null);
-        rowOMElement.addAttribute("id", "", null);
+        rowOMElement.addAttribute("id", "0", null);
         if (table.getNumColumns() > 0) {
             // add a row to the table because there are columns.
             // we will add a sample row into the skeleton with all columns.
